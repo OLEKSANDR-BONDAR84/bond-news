@@ -74,12 +74,11 @@ export class AppComponent implements OnInit {
 
   getNews(country: string, page: string): void {
     this.page = page;
-    this.httpClient.get<any>("https://bond-common-rest-api.herokuapp.com/api?id=1")
-    .subscribe( response => { this.httpClient.get(response.configValue.replace('http','https'),
-    {params: {country: country, pageSize: "5", page: this.page, apiKey: "2b0d53a3d6b74c5dbdcda7cdf7b190bf"}})
-      .subscribe((data: any)=> {
-        this.items = data.articles;
-    }); }, error => { console.log(error.message) });
+    this.httpClient.get("https://bond-common-rest-api.herokuapp.com/api/newsapi-top",
+        {params: {country: country, pageSize: "5", page: this.page, apiKey: "2b0d53a3d6b74c5dbdcda7cdf7b190bf"}})
+          .subscribe((data: any)=> {
+            this.items = data.articles;
+        });
   }
 
   geNextNews(): void {
