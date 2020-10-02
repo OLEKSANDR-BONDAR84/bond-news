@@ -36,6 +36,7 @@ export class AppComponent implements OnInit {
   maxArticles = '0';
   currCountry = this.DEFAULT_COUNTRY;
   currPage = this.DEFAULT_PAGE;
+  currentArticle = Number(this.DEFAULT_PAGE_SIZE);
   dropdownList = [];
   dropdownLanguageList = [];
   dropdownCountryList = [];
@@ -60,9 +61,9 @@ export class AppComponent implements OnInit {
       { item_id: 4, item_text: 'US' }
     ];
     this.dropdownCategoryList = [
-      { item_id: 1, item_text: 'Business' },
+      { item_id: 1, item_text: 'General' },
       { item_id: 2, item_text: 'Entertainment' },
-      { item_id: 3, item_text: 'General' },
+      { item_id: 3, item_text: 'Business' },
       { item_id: 4, item_text: 'Health' },
       { item_id: 5, item_text: 'Science' },
       { item_id: 6, item_text: 'Sports' },
@@ -73,6 +74,7 @@ export class AppComponent implements OnInit {
 
   getNews(page: string): void {
     this.currPage = page;
+    this.currentArticle = Number(this.currPage)*Number(this.DEFAULT_PAGE_SIZE);
     this.httpClient.get("https://bond-common-rest-api.herokuapp.com/api/query",
         {params: {type: "newsapi-top", country: this.currCountry, pageSize: this.DEFAULT_PAGE_SIZE, page: this.currPage}})
           .subscribe((data: any) => {
@@ -82,13 +84,13 @@ export class AppComponent implements OnInit {
   }
 
   geNextNews(): void {
-    if (Number(this.currPage)*Number(this.DEFAULT_PAGE_SIZE) < Number(this.maxArticles)) {
+    if (this.currentArticle < Number(this.maxArticles)) {
       this.getNews(String(Number(this.currPage)+1));
     }
   }
 
   gePrevNews(): void {
-    if (Number(this.currPage) > 0) {
+    if (Number(this.currPage) > 1) {
       this.getNews(String(Number(this.currPage)-1));
     }
   }
