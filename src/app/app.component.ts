@@ -74,7 +74,6 @@ export class AppComponent implements OnInit {
         {params: {type: "newsapi-top", country: this.currCountry, pageSize: this.DEFAULT_PAGE_SIZE,
         page: this.currPage, category: this.currCategory}})
           .subscribe((data: any) => {
-          console.log(this.currCountry);
             this.maxArticles = data.totalResults;
             this.items = data.articles;
         }, error => { console.log(error.message) });
