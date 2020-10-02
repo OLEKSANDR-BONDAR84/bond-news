@@ -34,8 +34,8 @@ and is wrapped around the whole page content, except for the footer in this exam
           <button onclick="myFunction('Demo2')" class="w3-button w3-block w3-theme-l1 w3-left-align"><i
             class="fa fa-calendar-check-o fa-fw w3-margin-right"></i> Country</button>
           <div id="Demo2" class="w3-hide w3-container">
-            <mat-select placeholder="PL" (selectionChange)="onSelectCountry($event.value)">
-              <mat-option *ngFor="let country of dropdownCountryList" [value]="country.item_text">
+            <mat-select placeholder="Poland" (selectionChange)="onSelectCountry($event.value)">
+              <mat-option *ngFor="let country of dropdownCountryList" [value]="country.item_code">
                 {{country.item_text}}
               </mat-option>
             </mat-select>

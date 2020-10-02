@@ -49,17 +49,11 @@ export class AppComponent implements OnInit {
   constructor(private httpClient: HttpClient) {}
 
   ngOnInit() {
-    this.dropdownLanguageList = [
-      { item_id: 1, item_text: 'PL' },
-      { item_id: 2, item_text: 'UA' },
-      { item_id: 3, item_text: 'RU' },
-      { item_id: 4, item_text: 'EN' }
-    ];
     this.dropdownCountryList = [
-      { item_id: 1, item_text: 'PL' },
-      { item_id: 2, item_text: 'UA' },
-      { item_id: 3, item_text: 'RU' },
-      { item_id: 4, item_text: 'US' }
+      { item_id: 1, item_text: 'Poland', item_code: 'pl'},
+      { item_id: 2, item_text: 'Ukraine', item_code: 'ua'},
+      { item_id: 3, item_text: 'russian', item_code: 'ru'},
+      { item_id: 4, item_text: 'USA', item_code: 'us'}
     ];
     this.dropdownCategoryList = [
       { item_id: 1, item_text: 'General' },
@@ -80,6 +74,7 @@ export class AppComponent implements OnInit {
         {params: {type: "newsapi-top", country: this.currCountry, pageSize: this.DEFAULT_PAGE_SIZE,
         page: this.currPage, category: this.currCategory}})
           .subscribe((data: any) => {
+          console.log(this.currCountry);
             this.maxArticles = data.totalResults;
             this.items = data.articles;
         }, error => { console.log(error.message) });
