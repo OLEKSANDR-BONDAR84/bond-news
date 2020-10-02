@@ -34,9 +34,10 @@ export class AppComponent implements OnInit {
   DEFAULT_PAGE = "1";
   DEFAULT_PAGE_SIZE = "3";
   maxArticles = '0';
-  currCountry = this.DEFAULT_COUNTRY;
   currPage = this.DEFAULT_PAGE;
   currentArticle = Number(this.DEFAULT_PAGE_SIZE);
+  currCountry = this.DEFAULT_COUNTRY;
+  currCategory = 'General';
   dropdownList = [];
   dropdownLanguageList = [];
   dropdownCountryList = [];
@@ -76,7 +77,8 @@ export class AppComponent implements OnInit {
     this.currPage = page;
     this.currentArticle = Number(this.currPage)*Number(this.DEFAULT_PAGE_SIZE);
     this.httpClient.get("https://bond-common-rest-api.herokuapp.com/api/query",
-        {params: {type: "newsapi-top", country: this.currCountry, pageSize: this.DEFAULT_PAGE_SIZE, page: this.currPage}})
+        {params: {type: "newsapi-top", country: this.currCountry, pageSize: this.DEFAULT_PAGE_SIZE,
+        page: this.currPage, category: this.currCategory}})
           .subscribe((data: any) => {
             this.maxArticles = data.totalResults;
             this.items = data.articles;
@@ -98,5 +100,10 @@ export class AppComponent implements OnInit {
   onSelectCountry(country: string): void {
     this.currCountry = country;
     this.getNews(this.DEFAULT_PAGE);
+  }
+
+  onSelectCategory(category: string): void {
+      this.currCategory = category;
+      this.getNews(this.DEFAULT_PAGE);
   }
 }

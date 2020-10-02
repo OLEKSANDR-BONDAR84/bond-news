@@ -41,6 +41,17 @@ and is wrapped around the whole page content, except for the footer in this exam
             </mat-select>
           </div>
         </li>
+        <li class="w3-padding-16">
+          <button onclick="myFunction('Demo3')" class="w3-button w3-block w3-theme-l1 w3-left-align"><i
+            class="fa fa-users fa-fw w3-margin-right"></i> Category</button>
+          <div id="Demo3" class="w3-hide w3-container">
+            <mat-select placeholder="General" (selectionChange)="onSelectCategory($event.value)">
+              <mat-option *ngFor="let category of dropdownCategoryList" [value]="category.item_text">
+                {{category.item_text}}
+              </mat-option>
+            </mat-select>
+          </div>
+        </li>
       </ul>
     </div>
     <hr>
@@ -51,8 +62,8 @@ and is wrapped around the whole page content, except for the footer in this exam
         <h4>Tags</h4>
       </div>
       <div class="w3-container w3-white">
-        <p><span class="w3-tag w3-black w3-margin-bottom">General</span> <span class="w3-tag w3-light-grey w3-small w3-margin-bottom">New York</span> <span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Entertainment</span>
-          <span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Business</span> <span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Health</span> <span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Health</span>
+        <p><span class="w3-tag w3-black w3-margin-bottom">General</span> <span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Entertainment</span> <span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Business</span>
+          <span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Health</span>
           <span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Science</span> <span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Sports</span> <span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Technology</span>
         </p>
       </div>
