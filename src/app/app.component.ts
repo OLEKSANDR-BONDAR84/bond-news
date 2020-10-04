@@ -50,7 +50,7 @@ export class AppComponent implements OnInit {
     this.dropdownCountryList = [
       { item_id: 1, item_text: 'Poland', item_code: 'pl'},
       { item_id: 2, item_text: 'Ukraine', item_code: 'ua'},
-      { item_id: 3, item_text: 'russian', item_code: 'ru'},
+      { item_id: 3, item_text: '??????', item_code: 'ru'},
       { item_id: 4, item_text: 'USA', item_code: 'us'}
     ];
     this.dropdownCategoryList = [
