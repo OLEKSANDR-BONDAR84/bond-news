@@ -31,11 +31,9 @@ export interface Article {
 export class AppComponent implements OnInit {
   title = 'bond-news';
   DEFAULT_COUNTRY = 'PL';
-  DEFAULT_PAGE = "1";
-  DEFAULT_PAGE_SIZE = "3";
-  maxArticles = '0';
-  currPage = this.DEFAULT_PAGE;
-  currentArticle = Number(this.DEFAULT_PAGE_SIZE);
+  DEFAULT_PAGE_SIZE = "1";
+  maxArticles = 1;
+  currPageSize = 1;
   currCountry = this.DEFAULT_COUNTRY;
   currCategory = 'General';
   dropdownList = [];
@@ -64,40 +62,34 @@ export class AppComponent implements OnInit {
       { item_id: 6, item_text: 'Sports' },
       { item_id: 7, item_text: 'Technology' }
     ];
-    this.getNews(this.DEFAULT_PAGE);
+    this.getNews();
   }
 
-  getNews(page: string): void {
-    this.currPage = page;
-    this.currentArticle = Number(this.currPage)*Number(this.DEFAULT_PAGE_SIZE);
+  getNews(): void {
     this.httpClient.get("https://bond-common-rest-api.herokuapp.com/api/query",
-        {params: {type: "newsapi-top", country: this.currCountry, pageSize: this.DEFAULT_PAGE_SIZE,
-        page: this.currPage, category: this.currCategory}})
+        {params: {type: "newsapi-top", country: this.currCountry, pageSize: String(this.currPageSize), category: this.currCategory}})
           .subscribe((data: any) => {
-            this.maxArticles = data.totalResults;
+            this.maxArticles = +data.totalResults;
             this.items = data.articles;
-        }, error => { console.log(error.message) });
+        }, error => { console.log(error.message); });
   }
 
   geNextNews(): void {
-    if (this.currentArticle < Number(this.maxArticles)) {
-      this.getNews(String(Number(this.currPage)+1));
-    }
-  }
-
-  gePrevNews(): void {
-    if (Number(this.currPage) > 1) {
-      this.getNews(String(Number(this.currPage)-1));
+    if (Number(this.currPageSize) < this.maxArticles) {
+      this.currPageSize++;
+      this.getNews();
     }
   }
 
   onSelectCountry(country: string): void {
     this.currCountry = country;
-    this.getNews(this.DEFAULT_PAGE);
+    this.currPageSize = 1;
+    this.getNews();
   }
 
   onSelectCategory(category: string): void {
       this.currCategory = category;
-      this.getNews(this.DEFAULT_PAGE);
+      this.currPageSize = 1;
+      this.getNews();
   }
 }

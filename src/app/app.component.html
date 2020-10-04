@@ -19,6 +19,7 @@ and is wrapped around the whole page content, except for the footer in this exam
   <p>Welcome to the blog of <a href="https://oleksandr-bondar84.github.io/bond-cv-light-template/" class="w3-tag" target="_blank">Bond Aleks</a></p>
 </header>
 
+  <app-loader></app-loader>
 <!-- Grid -->
 <div class="w3-row">
   <!-- Introduction menu -->
@@ -99,6 +100,7 @@ and is wrapped around the whole page content, except for the footer in this exam
 	<hr>
   </div>
 
+  <button type="button" class="w3-button w3-black w3-black w3-padding-large w3-margin-bottom" (click)="geNextNews()">Next »</button>
 <!-- END BLOG ENTRIES -->
 </div>
 
@@ -110,9 +112,7 @@ and is wrapped around the whole page content, except for the footer in this exam
 
 <!-- Footer -->
 <footer class="w3-container w3-dark-grey w3-padding-32 w3-margin-top">
-  <button type="button" class="w3-button w3-black w3-black w3-padding-large w3-margin-bottom" (click)="gePrevNews()">Previous</button>
-  <button type="button" class="w3-button w3-black w3-black w3-padding-large w3-margin-bottom" (click)="geNextNews()">Next »</button>
-  <span class="w3-button w3-black w3-disabled w3-padding-large w3-margin-bottom">{{currentArticle}} of {{maxArticles}}</span>
+  <span class="w3-button w3-black w3-disabled w3-padding-large w3-margin-bottom">{{currPageSize}} of {{maxArticles}}</span>
 </footer>
 
 </body>
