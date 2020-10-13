@@ -13,6 +13,6 @@ export class LoaderComponent {
   mode = 'indeterminate';
   value = 50;
   isLoading: Subject<boolean> = this.loaderService.isLoading;
-  
+
   constructor(private loaderService: LoaderService){}
 }
